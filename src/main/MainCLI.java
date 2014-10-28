@@ -4,6 +4,7 @@ import java.util.Date;
 
 import it.sauronsoftware.cron4j.Scheduler;
 import jobs.AlarmTask;
+import jobs.BatchTask;
 
 public class MainCLI {
 
@@ -14,6 +15,7 @@ public class MainCLI {
 			System.out.println(String.format("Scheduler started %s",time));
 			// Schedule a once-a-minute task.
 			s.schedule("*/2 * * * *",new AlarmTask());
+			s.schedule("*/1 * * * *", new BatchTask("RunBatch1","test.bat"));
 			// Starts the scheduler.
 			s.start();
 			// Will run for ten minutes.

@@ -32,11 +32,11 @@ public class DirtyTaskExecutionListener implements TaskExecutorListener{
 	public void executionTerminated(TaskExecutor executor, Throwable exception) {
 		String time = new SimpleDateFormat("dd:MM:yy HH:mm").format(new Date());
 		String exit = exception==null ? "Terminated successfully":exception.getMessage();
-		System.out.println(String.format("%s %s",executor.getGuid(),time,exit));
+		System.out.println(String.format("%s %s %s",executor.getTask().toString(),time,exit));
 	}
 
 	public void statusMessageChanged(TaskExecutor executor, String statusMessage) {
-		System.out.println(String.format("%s %s %s",executor.getGuid(),new SimpleDateFormat("dd:MM:yy HH:mm").format(new Date()),statusMessage));
+		System.out.println(String.format("%s %s %s",executor.getTask().toString(),new SimpleDateFormat("dd:MM:yy HH:mm").format(new Date()),statusMessage));
 		
 	}
 

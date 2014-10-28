@@ -10,8 +10,9 @@ public class AlarmTask extends BaseTask{
 	private String message;
 	private static final String DEFAULT_MESSAGE = "BOOM!";
 	
-	public AlarmTask(String message){
+	public AlarmTask(String name, String message){
 		this.message = message;
+		this.name = name;
 	}
 	
 	public AlarmTask() {
