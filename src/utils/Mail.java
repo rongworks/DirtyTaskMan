@@ -2,7 +2,6 @@ package utils;
 
 import main.Settings;
 
-import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.MultiPartEmail;

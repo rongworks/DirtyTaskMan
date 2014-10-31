@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import collectors.CronFileCollector;
 import it.sauronsoftware.cron4j.Scheduler;
 import jobs.AlarmTask;
 import jobs.BatchTask;
@@ -25,13 +26,13 @@ public class MainCLI {
 			String time = new SimpleDateFormat("HH:mm").format(new Date());
 			System.out.println(String.format("Scheduler started %s",time));
 			// Schedule a once-a-minute task.
-			s.schedule("*/2 * * * *",new AlarmTask());
+			//s.schedule("*/2 * * * *",new AlarmTask());
 			//s.schedule("8 * * * *", new BatchTask("RunBatch1","test.bat"));
-			
+			s.addTaskCollector(new CronFileCollector("config/jobs.txt"));
 			// Starts the scheduler.
 			s.start();
 			// Will run for ten minutes.
-			s.launch(new BatchTask("BatchTask", "test.bat"));
+			//s.launch(new BatchTask("BatchTask", "test.bat"));
 			try {
 				Thread.sleep(1000L * 60L * 10L);
 			} catch (InterruptedException e) {
