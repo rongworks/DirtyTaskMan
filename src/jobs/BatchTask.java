@@ -49,7 +49,6 @@ public class BatchTask extends BaseTask {
 		  log(String.format("Process finished with exit code: %d",exitCode));
 		  context.setStatusMessage(popStatus());
 		  context.setStatusMessage("full log: "+getLog());
-		  
 		}
 		catch(IOException io){
 			throw new RuntimeException(io.getMessage());

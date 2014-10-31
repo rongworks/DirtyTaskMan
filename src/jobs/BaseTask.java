@@ -2,7 +2,7 @@ package jobs;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
-import Utils.PresentationUtil;
+import utils.PresentationUtil;
 import listeners.DirtyTaskExecutionListener;
 import it.sauronsoftware.cron4j.Task;
 import it.sauronsoftware.cron4j.TaskExecutionContext;
