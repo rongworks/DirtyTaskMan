@@ -2,19 +2,34 @@ package jobs;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import utils.PresentationUtil;
+import utils.TaskRepository;
 import listeners.DirtyTaskExecutionListener;
 import it.sauronsoftware.cron4j.Task;
 import it.sauronsoftware.cron4j.TaskExecutionContext;
 
 public abstract class BaseTask extends Task{
-
+	private Logger logger = LoggerFactory.getLogger(getClass());
 	private String log = ""; // complete log since execution of Task
 	private LinkedBlockingQueue<String> logQueue = new LinkedBlockingQueue<String>(); // Log-Queue for querying log-messages
-	public String name = "Default Task"; // Name of the Task, used in logs
+	public String name; // Name of the Task, used in logs
+	public String argument; // Execution context, e.g. message to display, cmd to execute etc.
+	
+	public BaseTask(String name, String argument){
+		this.name = name;
+		this.argument = argument;
+		TaskRepository.getInstance().addTask(this);
+	}
 	
 	public String getName(){
 		return name;
+	}
+	
+	public String getArgument(){
+		return argument;
 	}
 	
 	/**
@@ -32,7 +47,7 @@ public abstract class BaseTask extends Task{
 	@Override
 	public void execute(TaskExecutionContext context) throws RuntimeException {
 		log = "";
-		System.out.println("Starting Task "+getName());
+		logger.debug("Starting Task "+getName());
 		context.getTaskExecutor().addTaskExecutorListener(new DirtyTaskExecutionListener());
 	}
 	
@@ -61,7 +76,6 @@ public abstract class BaseTask extends Task{
 	public synchronized void log(String message){
 		log += String.format("[%s] [%s] %s \n",getName(), PresentationUtil.getCurrentTimeString(),message);
 		logQueue.add(message);
-		System.out.println("LogQueue "+getName()+": "+logQueue);
 	}
 	
 	@Override

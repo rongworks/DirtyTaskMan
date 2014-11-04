@@ -1,15 +1,19 @@
 package main;
+import it.sauronsoftware.cron4j.Scheduler;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import utils.PresentationUtil;
 import collectors.CronFileCollector;
-import it.sauronsoftware.cron4j.Scheduler;
-import jobs.AlarmTask;
-import jobs.BatchTask;
 
 public class MainCLI {
+private static Logger logger = LoggerFactory.getLogger("Main");
 
 		public static void main(String[] args) {
 			try {
@@ -23,11 +27,7 @@ public class MainCLI {
 			}
 			// Creates a Scheduler instance.
 			Scheduler s = new Scheduler();
-			String time = new SimpleDateFormat("HH:mm").format(new Date());
-			System.out.println(String.format("Scheduler started %s",time));
-			// Schedule a once-a-minute task.
-			//s.schedule("*/2 * * * *",new AlarmTask());
-			//s.schedule("8 * * * *", new BatchTask("RunBatch1","test.bat"));
+			logger.debug(String.format("Scheduler started %s",PresentationUtil.getCurrentTimeString()));
 			s.addTaskCollector(new CronFileCollector("config/jobs.txt"));
 			// Starts the scheduler.
 			s.start();

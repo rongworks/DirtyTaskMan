@@ -1,0 +1,5 @@
+# testCronGeneration
+ # auto generated cron-task File 
+ # created_at: 04.11.14 15:43
+* * * * * BatchTask MyName MyCmd 
+* */4 3 1 * AlarmTask MyName My Message 

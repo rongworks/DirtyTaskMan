@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class FileOperations {
 
-	public static void writeFile(String name, String content) {
+	public static File writeFile(String name, String content) {
 		try {
 			File f = new File(name);
 			FileWriter writer = new FileWriter(f);
@@ -15,8 +15,10 @@ public class FileOperations {
 			bwriter.write(content);
 			bwriter.flush();
 			bwriter.close();
+			return f;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 }

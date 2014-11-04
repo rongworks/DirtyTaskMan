@@ -13,7 +13,7 @@ public class BatchTask extends BaseTask {
 	private String[] cmdParsed;
 
 	public BatchTask(String name, String cmd) {
-		this.name = name;
+		super(name,cmd);
 		cmdParsed = cmd.split(" ");
 	}
 

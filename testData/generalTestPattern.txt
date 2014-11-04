@@ -1,0 +1,5 @@
+# Ein Kommentar
+* * * * * AlarmTask BeepEveryMinute Beep Beep !! BEEEEPP!!
+*/2 * * * * BatchTask myBatchTask test.bat
+*/1 * 4 3 * AlarmTask myAlarmTask Hey! Da!
+# Noch ein Kommentar

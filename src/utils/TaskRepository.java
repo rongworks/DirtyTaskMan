@@ -1,6 +1,7 @@
 package utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 
@@ -9,6 +10,7 @@ import jobs.BaseTask;
 public class TaskRepository extends Observable{
 	private static TaskRepository instance;
 	private List<BaseTask> tasks;
+	private HashMap<String,String> activeTaskIDs;
 
 	enum changes{
 		TASK_ADDED,

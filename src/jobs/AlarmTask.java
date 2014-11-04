@@ -11,12 +11,12 @@ public class AlarmTask extends BaseTask{
 	private static final String DEFAULT_MESSAGE = "BOOM!";
 	
 	public AlarmTask(String name, String message){
-		this.message = message;
-		this.name = name;
+		super(name,message);
+		this.message = getArgument();
 	}
 	
 	public AlarmTask() {
-		message = DEFAULT_MESSAGE;
+		super("Alarm",DEFAULT_MESSAGE);
 	}
 	
 	@Override
