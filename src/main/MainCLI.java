@@ -6,14 +6,14 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import main.collectors.CronFileCollector;
+import main.utils.PresentationUtil;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import utils.PresentationUtil;
-import collectors.CronFileCollector;
-
 public class MainCLI {
-private static Logger logger = LoggerFactory.getLogger("Main");
+private static Logger logger = LoggerFactory.getLogger(MainCLI.class);
 
 		public static void main(String[] args) {
 			try {
@@ -28,7 +28,7 @@ private static Logger logger = LoggerFactory.getLogger("Main");
 			// Creates a Scheduler instance.
 			Scheduler s = new Scheduler();
 			logger.debug(String.format("Scheduler started %s",PresentationUtil.getCurrentTimeString()));
-			s.addTaskCollector(new CronFileCollector("config/jobs.txt"));
+			s.addTaskCollector(new CronFileCollector("src/resources/jobs.txt"));
 			// Starts the scheduler.
 			s.start();
 			// Will run for ten minutes.

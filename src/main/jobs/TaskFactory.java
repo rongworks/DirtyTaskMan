@@ -1,4 +1,4 @@
-package jobs;
+package main.jobs;
 
 
 public class TaskFactory {

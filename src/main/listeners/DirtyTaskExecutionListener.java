@@ -1,4 +1,4 @@
-package listeners;
+package main.listeners;
 
 import it.sauronsoftware.cron4j.TaskExecutor;
 import it.sauronsoftware.cron4j.TaskExecutorListener;
@@ -6,12 +6,12 @@ import it.sauronsoftware.cron4j.TaskExecutorListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import main.jobs.BaseTask;
+import main.utils.MailHandling;
+
 import org.apache.commons.mail.EmailException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import utils.MailHandling;
-import jobs.BaseTask;
 
 public class DirtyTaskExecutionListener implements TaskExecutorListener{
 	private Logger logger = LoggerFactory.getLogger(getClass().getSimpleName());

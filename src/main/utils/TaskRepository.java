@@ -1,11 +1,11 @@
-package utils;
+package main.utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 
-import jobs.BaseTask;
+import main.jobs.BaseTask;
 
 public class TaskRepository extends Observable{
 	private static TaskRepository instance;

@@ -1,4 +1,4 @@
-package jobs;
+package main.jobs;
 
 import it.sauronsoftware.cron4j.TaskExecutionContext;
 

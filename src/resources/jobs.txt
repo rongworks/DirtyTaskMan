@@ -1,0 +1,4 @@
+# Ein Kommentar
+*/2 * * * * BatchTask myBatchTask testData/test.bat
+*/2 * * * * AlarmTask myAlarmTask Hey! Da!
+# Noch ein Kommentar

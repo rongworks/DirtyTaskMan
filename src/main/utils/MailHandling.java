@@ -1,4 +1,4 @@
-package utils;
+package main.utils;
 
 import org.apache.commons.mail.EmailException;
 

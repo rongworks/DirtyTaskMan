@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Properties;
 
 public class Settings {
-	private static String settings_path = "config/settings.properties";
+	private static String settings_path = "src/resources/settings.properties";
 	private static Settings instance;
 	HashMap<String, String> settings;
 	

@@ -1,4 +1,4 @@
-package collectors;
+package main.collectors;
 
 import it.sauronsoftware.cron4j.Scheduler;
 import it.sauronsoftware.cron4j.SchedulingPattern;
@@ -14,15 +14,14 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import jobs.BaseTask;
-import jobs.TaskFactory;
+import main.jobs.BaseTask;
+import main.jobs.TaskFactory;
+import main.utils.FileOperations;
+import main.utils.PresentationUtil;
+import main.utils.TaskRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import utils.FileOperations;
-import utils.PresentationUtil;
-import utils.TaskRepository;
 
 /**
  * Reads a cron-like File containing this pattern:

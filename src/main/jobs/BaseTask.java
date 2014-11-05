@@ -1,13 +1,13 @@
-package jobs;
+package main.jobs;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import utils.PresentationUtil;
-import utils.TaskRepository;
-import listeners.DirtyTaskExecutionListener;
+import main.listeners.DirtyTaskExecutionListener;
+import main.utils.PresentationUtil;
+import main.utils.TaskRepository;
 import it.sauronsoftware.cron4j.Task;
 import it.sauronsoftware.cron4j.TaskExecutionContext;
 
