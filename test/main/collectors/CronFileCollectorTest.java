@@ -1,6 +1,8 @@
 package main.collectors;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import it.sauronsoftware.cron4j.Scheduler;
@@ -11,11 +13,9 @@ import it.sauronsoftware.cron4j.TaskTable;
 import java.io.BufferedReader;
 import java.io.File;
 
-import main.collectors.CronFileCollector;
 import main.jobs.AlarmTask;
 import main.jobs.BaseTask;
 import main.jobs.BatchTask;
-import main.utils.TaskRepository;
 
 import org.junit.After;
 import org.junit.Before;

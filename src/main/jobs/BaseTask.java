@@ -1,15 +1,15 @@
 package main.jobs;
 
-import java.util.concurrent.LinkedBlockingQueue;
+import it.sauronsoftware.cron4j.Task;
+import it.sauronsoftware.cron4j.TaskExecutionContext;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import main.listeners.DirtyTaskExecutionListener;
 import main.utils.PresentationUtil;
-import main.utils.TaskRepository;
-import it.sauronsoftware.cron4j.Task;
-import it.sauronsoftware.cron4j.TaskExecutionContext;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class BaseTask extends Task{
 	private Logger logger = LoggerFactory.getLogger(getClass());
@@ -21,7 +21,6 @@ public abstract class BaseTask extends Task{
 	public BaseTask(String name, String argument){
 		this.name = name;
 		this.argument = argument;
-		TaskRepository.getInstance().addTask(this);
 	}
 	
 	public String getName(){
@@ -81,5 +80,15 @@ public abstract class BaseTask extends Task{
 	@Override
 	public String toString(){
 		return getName();
+	}
+	
+	@Override
+	public boolean equals(Object o){
+		if(BaseTask.class.isAssignableFrom(o.getClass())){
+			BaseTask bt = (BaseTask)o;
+			return bt.getName().equals(this.getName());
+		}
+		return false;
+		
 	}
 }

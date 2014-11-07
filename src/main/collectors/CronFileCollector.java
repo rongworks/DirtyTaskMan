@@ -4,7 +4,6 @@ import it.sauronsoftware.cron4j.Scheduler;
 import it.sauronsoftware.cron4j.SchedulingPattern;
 import it.sauronsoftware.cron4j.Task;
 import it.sauronsoftware.cron4j.TaskCollector;
-import it.sauronsoftware.cron4j.TaskExecutor;
 import it.sauronsoftware.cron4j.TaskTable;
 
 import java.io.BufferedReader;
@@ -18,7 +17,6 @@ import main.jobs.BaseTask;
 import main.jobs.TaskFactory;
 import main.utils.FileOperations;
 import main.utils.PresentationUtil;
-import main.utils.TaskRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

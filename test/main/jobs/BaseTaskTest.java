@@ -1,8 +1,6 @@
 package main.jobs;
 
-import static org.junit.Assert.*;
-import main.jobs.BaseTask;
-import main.utils.TaskRepository;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
@@ -16,7 +14,6 @@ public class BaseTaskTest {
 		};
 		assertNotNull(t.getName());
 		assertNotNull(t.getArgument());
-		assertTrue(TaskRepository.getInstance().getTasks().contains(t));
 	}
 
 }

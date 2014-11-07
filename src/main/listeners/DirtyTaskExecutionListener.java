@@ -7,44 +7,64 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import main.jobs.BaseTask;
-import main.utils.MailHandling;
+import main.utils.MailHandler;
+import main.utils.PresentationUtil;
 
 import org.apache.commons.mail.EmailException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DirtyTaskExecutionListener implements TaskExecutorListener{
+public class DirtyTaskExecutionListener implements TaskExecutorListener {
 	private Logger logger = LoggerFactory.getLogger(getClass().getSimpleName());
+	MailHandler mailHandler = null;
+
+	public DirtyTaskExecutionListener() {
+
+	}
+
+	public DirtyTaskExecutionListener(MailHandler mailHandler) {
+		this.mailHandler = mailHandler;
+	}
+
 	public void completenessValueChanged(TaskExecutor executor,
 			double completenessValue) {
-		// TODO Auto-generated method stub
-		
+		logger.info(String.format("%s %s %s ", executor.getTask().toString(),
+				PresentationUtil.getCurrentTimeString(), "" + completenessValue
+						* 100 + "%"));
 	}
 
 	public void executionPausing(TaskExecutor executor) {
-		// TODO Auto-generated method stub
-		
+		logger.info(String.format("%s %s %s", executor.getTask().toString(),
+				PresentationUtil.getCurrentTimeString(), "PAUSED"));
 	}
 
 	public void executionResuming(TaskExecutor executor) {
-		// TODO Auto-generated method stub
-		
+		logger.info(String.format("%s %s %s", executor.getTask().toString(),
+				PresentationUtil.getCurrentTimeString(), "RESUMED"));
+
 	}
 
 	public void executionStopping(TaskExecutor executor) {
-		// TODO Auto-generated method stub
-		
+		logger.info(String.format("%s %s %s", executor.getTask().toString(),
+				PresentationUtil.getCurrentTimeString(), "STOPPED"));
 	}
 
 	public void executionTerminated(TaskExecutor executor, Throwable exception) {
-		String time = new SimpleDateFormat("dd:MM:yy HH:mm").format(new Date());
-		String exit = exception==null ? "Terminated successfully":exception.getMessage();
-		logger.info(String.format("%s %s %s",executor.getTask().toString(),time,exit));
-		if(exception != null){
+		String time = PresentationUtil.getCurrentTimeString();
+		String exit = exception == null ? "Terminated successfully" : exception
+				.getMessage();
+		logger.info(String.format("%s %s %s", executor.getTask().toString(),
+				time, exit));
+		if (exception != null) {
 			BaseTask t = (BaseTask) executor.getTask();
 			try {
-				logger.debug("Sending Mail");
-				MailHandling.createMail(String.format(" Task %s failed! [%s]",t.getName(),time), t.getLog()).send();
+				if (mailHandler != null) {
+					mailHandler.createMail(
+							String.format(" Task %s failed! [%s]", t.getName(),
+									time), t.getLog()).send();
+				} else {
+					logger.info("Mail delivery deactivated, not sending mails");
+				}
 			} catch (EmailException e) {
 				e.printStackTrace();
 			}
@@ -52,8 +72,25 @@ public class DirtyTaskExecutionListener implements TaskExecutorListener{
 	}
 
 	public void statusMessageChanged(TaskExecutor executor, String statusMessage) {
-		logger.info(String.format("%s %s %s",executor.getTask().toString(),new SimpleDateFormat("dd:MM:yy HH:mm").format(new Date()),statusMessage));
-		
+		logger.info(String.format("%s %s %s", executor.getTask().toString(),
+				PresentationUtil.getCurrentTimeString(), statusMessage));
+
+	}
+
+	public Logger getLogger() {
+		return logger;
+	}
+
+	public void setLogger(Logger logger) {
+		this.logger = logger;
+	}
+
+	public MailHandler getMailHandler() {
+		return mailHandler;
+	}
+
+	public void setMailHandler(MailHandler mailHandler) {
+		this.mailHandler = mailHandler;
 	}
 
 }
