@@ -11,7 +11,10 @@ import org.slf4j.LoggerFactory;
 public class MainCLI {
 	private static Logger logger = LoggerFactory.getLogger(MainCLI.class);
 	private static ApplicationManager applicationManager;
-
+	private static Scheduler scheduler;
+	private static CronFileCollector cronCollect;
+	private static boolean active;
+	
 	public static ApplicationManager getApplicationManager() {
 		if (applicationManager == null) {
 			applicationManager = new ApplicationManager();
@@ -20,18 +23,57 @@ public class MainCLI {
 	}
 
 	public static void main(String[] args) {
-		boolean active = true; // run forever till terminated
-		
-		Scheduler s = new Scheduler();
-		logger.debug(String.format("Scheduler started %s",
-				PresentationUtil.getCurrentTimeString()));
-		s.addTaskCollector(new CronFileCollector("src/resources/jobs.txt"));
-		
+		active = true; // run forever till terminated
 		// Start the scheduler.
-		s.start();
+		scheduler.start();
 		while(active){
 			// run run run
 		}
-		s.stop();
+		scheduler.stop();
+	}
+	
+	public static void setUpScheduler(){
+		scheduler = new Scheduler();
+		//TODO: Make CronFiles paths arguments
+		cronCollect = new CronFileCollector("src/resources/jobs.txt");
+		scheduler.addTaskCollector(cronCollect);
+		logger.debug(String.format("Scheduler started %s",
+				PresentationUtil.getCurrentTimeString()));
+	}
+
+	public static Logger getLogger() {
+		return logger;
+	}
+
+	public static void setLogger(Logger logger) {
+		MainCLI.logger = logger;
+	}
+
+	public static Scheduler getScheduler() {
+		return scheduler;
+	}
+
+	public static void setScheduler(Scheduler scheduler) {
+		MainCLI.scheduler = scheduler;
+	}
+
+	public static CronFileCollector getCronCollect() {
+		return cronCollect;
+	}
+
+	public static void setCronCollect(CronFileCollector cronCollect) {
+		MainCLI.cronCollect = cronCollect;
+	}
+
+	public static boolean isActive() {
+		return active;
+	}
+
+	public static void setActive(boolean active) {
+		MainCLI.active = active;
+	}
+
+	public static void setApplicationManager(ApplicationManager applicationManager) {
+		MainCLI.applicationManager = applicationManager;
 	}
 }
