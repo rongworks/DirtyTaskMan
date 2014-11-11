@@ -15,7 +15,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class BatchTaskTest {
+public class ExecutionTaskTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -36,7 +36,7 @@ public class BatchTaskTest {
 		
 		when(mockCon.getTaskExecutor()).thenReturn(mockExecutor);
 		
-		BatchTask bt = new BatchTask("testBatch", file.getAbsolutePath());
+		ExecutionTask bt = new ExecutionTask("testBatch", file.getAbsolutePath());
 		bt.execute(mockCon);
 		file.delete();
 		
@@ -47,6 +47,11 @@ public class BatchTaskTest {
 		File f = File.createTempFile("testBat", ".bat");
 		FileOperations.writeFile(f.getAbsolutePath(),content);
 		return f;
+	}
+
+	@Test
+	public void testParseCommand() throws Exception {
+		throw new RuntimeException("not yet implemented");
 	}
 
 }

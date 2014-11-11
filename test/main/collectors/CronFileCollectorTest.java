@@ -15,7 +15,7 @@ import java.io.File;
 
 import main.jobs.AlarmTask;
 import main.jobs.BaseTask;
-import main.jobs.BatchTask;
+import main.jobs.ExecutionTask;
 
 import org.junit.After;
 import org.junit.Before;
@@ -105,7 +105,7 @@ public class CronFileCollectorTest {
 			public TaskTable getTasks() {
 				String testPattern = "* * * * *";
 				String testPattern2 = "* */4 3 1 *";
-				BatchTask bt = new BatchTask("MyName", "MyCmd");
+				ExecutionTask bt = new ExecutionTask("MyName", "MyCmd");
 				AlarmTask at = new AlarmTask("MyName", "My Message");
 				TaskTable tasks = new TaskTable();
 				tasks.add(new SchedulingPattern(testPattern), bt);

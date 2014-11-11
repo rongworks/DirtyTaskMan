@@ -91,4 +91,20 @@ public abstract class BaseTask extends Task{
 		return false;
 		
 	}
+
+	public Logger getLogger() {
+		return logger;
+	}
+
+	public void setLogger(Logger logger) {
+		this.logger = logger;
+	}
+
+	public LinkedBlockingQueue<String> getLogQueue() {
+		return logQueue;
+	}
+
+	public void setLogQueue(LinkedBlockingQueue<String> logQueue) {
+		this.logQueue = logQueue;
+	}
 }

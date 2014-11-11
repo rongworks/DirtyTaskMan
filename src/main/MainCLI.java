@@ -24,6 +24,7 @@ public class MainCLI {
 
 	public static void main(String[] args) {
 		active = true; // run forever till terminated
+		setUpScheduler();
 		// Start the scheduler.
 		scheduler.start();
 		while(active){

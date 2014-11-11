@@ -1,4 +1,5 @@
 # Ein Kommentar
-*/2 * * * * BatchTask myBatchTask testData/test.bat
+*/2 * * * * ExecutionTask myBatchTask testData/test.bat
+*/1 * * * * PowershellTask myPSTask C:\Users\Rong\Desktop\testPS.ps1
 */2 * * * * AlarmTask myAlarmTask Hey! Da!
 # Noch ein Kommentar

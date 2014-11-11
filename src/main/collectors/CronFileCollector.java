@@ -52,6 +52,10 @@ public class CronFileCollector implements TaskCollector {
 	}
 
 	public TaskTable getTasks() {
+		// XXX: Do not read file every minute
+		if(taskTable.size() > 0){
+			return taskTable;
+		}
 		taskTable = new TaskTable();
 		try {
 			boolean eof = false;

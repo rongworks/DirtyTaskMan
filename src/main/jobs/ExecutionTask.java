@@ -6,28 +6,32 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class BatchTask extends BaseTask {
+public class ExecutionTask extends BaseTask {
 
 	private String[] cmdParsed;
 
-	public BatchTask(String name, String cmd) {
+	public ExecutionTask(String name, String cmd) {
 		super(name,cmd);
-		cmdParsed = cmd.split(" ");
+		cmdParsed = parseCommand(cmd);
 	}
 
 	/**
-	 * Execute Batch file as a System Process
+	 * Execute a file or command as a System Process
 	 * The STDIN and STDERR are redirected to the Tasks log
 	 * @throws RuntimeException for ExitCode != 0
 	 * TODO: Enhance Exception Handling
-	 * TODO: Scheduler output is not sequential, log file is
+	 * TODO: Test on Linux
 	 */
 	@Override
 	public void execute(TaskExecutionContext context) throws RuntimeException {
 		super.execute(context);
 		log("executing command: "+Arrays.toString(cmdParsed));
+		getLogger().debug("executing command: "+Arrays.toString(cmdParsed));
 		try{
 		  ProcessBuilder processBuilder = new ProcessBuilder(cmdParsed);
 		  processBuilder.redirectErrorStream(true);
@@ -36,6 +40,7 @@ public class BatchTask extends BaseTask {
 		  InputStream input = process.getInputStream();
 		  InputStreamReader sr = new InputStreamReader(input);
 		  BufferedReader reader = new BufferedReader(sr);
+		  process.getOutputStream().close();
 		  
 		  String line;
 		  while ((line = reader.readLine ()) != null) {
@@ -59,5 +64,15 @@ public class BatchTask extends BaseTask {
 		
 		
 		
+	}
+	
+	public String[] parseCommand(String command){
+		ArrayList<String> parsed = new ArrayList<String>();
+		Pattern pattern = Pattern.compile("[^\\s\"']+|\"([^\"]*)\"|'([^']*)'"); 
+		Matcher matcher = pattern.matcher(command);
+		while(matcher.find()){
+			parsed.add(matcher.group());
+		}
+		return parsed.toArray(new String[]{});
 	}
 }
