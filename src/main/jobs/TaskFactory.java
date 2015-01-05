@@ -6,7 +6,7 @@ public class TaskFactory {
 	// Could use dynamic class loader here
 	public static BaseTask getTask(String type, String name, String argument){
 		BaseTask t = null;
-		if(type.equals("Execution")){
+		if(type.equals("ExecutionTask")){
 			t = new ExecutionTask(name, argument);
 		}
 		else if(type.equals("AlarmTask")){

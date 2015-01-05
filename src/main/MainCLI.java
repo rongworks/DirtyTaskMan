@@ -1,5 +1,8 @@
 package main;
 
+import java.io.File;
+import java.io.IOException;
+
 import it.sauronsoftware.cron4j.Scheduler;
 import main.collectors.CronFileCollector;
 import main.manager.ApplicationManager;
@@ -23,6 +26,7 @@ public class MainCLI {
 	}
 
 	public static void main(String[] args) {
+		getApplicationManager();
 		active = true; // run forever till terminated
 		setUpScheduler();
 		// Start the scheduler.
@@ -36,7 +40,17 @@ public class MainCLI {
 	public static void setUpScheduler(){
 		scheduler = new Scheduler();
 		//TODO: Make CronFiles paths arguments
-		cronCollect = new CronFileCollector("src/resources/jobs.txt");
+		File f = new File("config/jobs.txt");
+		if(!f.exists()){
+			try {
+				f.createNewFile();
+			} catch (IOException e) {
+				logger.error("Could not create file "+f.getAbsolutePath());
+			}
+			logger.error("No jobs defined, please define jobs in the jobs.txt");
+			System.exit(1);
+		}
+		cronCollect = new CronFileCollector(f.getAbsolutePath());
 		scheduler.addTaskCollector(cronCollect);
 		logger.debug(String.format("Scheduler started %s",
 				PresentationUtil.getCurrentTimeString()));

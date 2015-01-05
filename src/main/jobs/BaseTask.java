@@ -5,6 +5,7 @@ import it.sauronsoftware.cron4j.TaskExecutionContext;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
+import main.MainCLI;
 import main.listeners.DirtyTaskExecutionListener;
 import main.utils.PresentationUtil;
 
@@ -47,7 +48,7 @@ public abstract class BaseTask extends Task{
 	public void execute(TaskExecutionContext context) throws RuntimeException {
 		log = "";
 		logger.debug("Starting Task "+getName());
-		context.getTaskExecutor().addTaskExecutorListener(new DirtyTaskExecutionListener());
+		context.getTaskExecutor().addTaskExecutorListener(new DirtyTaskExecutionListener(MainCLI.getApplicationManager().getMailHandler()));
 	}
 	
 	/**

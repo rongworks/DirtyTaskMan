@@ -17,8 +17,11 @@ public class ApplicationManager {
 	}
 	
 	public void init(){
-		settings = new FileSettings("src/resources/settings.properties");
+		String path = "config/settings.properties";
+		settings = new FileSettings(path);
+		settings.load();
 		mailHandler = new MailHandler(settings);
+		logger.debug("Settings and MailHandler initialized.");
 	}
 	
 	public Logger getLogger() {
