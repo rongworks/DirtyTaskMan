@@ -26,9 +26,9 @@ public class CronFileCollectorTest {
 	CronFileCollector collector;
 	File testFile;
 
-	String everyHourBatchPattern = "* * * * * BatchTask myBatchTask test.bat";
+	String everyHourBatchPattern = "* * * * * ExecutionTask myBatchTask test.bat";
 	String everyMinuteAlarmPattern = "*/1 * * * * AlarmTask myAlarmTask test.bat";
-	String invalidSchedulePattern = "** * BatchTask test.bat";
+	String invalidSchedulePattern = "** * ExecutionTask test.bat";
 	String invalidTypePattern = "*/2 * * * * SomeUnknownTask myUnknownTypeTask test.bat";
 
 	@Before

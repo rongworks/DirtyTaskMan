@@ -1,6 +1,6 @@
 package main.jobs;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import it.sauronsoftware.cron4j.TaskExecutionContext;
@@ -51,7 +51,12 @@ public class ExecutionTaskTest {
 
 	@Test
 	public void testParseCommand() throws Exception {
-		throw new RuntimeException("not yet implemented");
+		//TODO: test more patterns
+		String command = "powershell.exe \"C:\\Program Files\\bla.bat\"";
+		ExecutionTask bt = new ExecutionTask("testBatch", command);
+		String[] result = bt.parseCommand(command);
+		assertEquals("first param should be powershell, but was "+result[0], result[0], "powershell.exe");
+		assertEquals( "second param should be the path, but was "+result[1], result[1], "\"C:\\Program Files\\bla.bat\"");
 	}
 
 }
