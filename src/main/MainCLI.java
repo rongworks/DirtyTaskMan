@@ -47,7 +47,7 @@ public class MainCLI {
 			} catch (IOException e) {
 				logger.error("Could not create file "+f.getAbsolutePath());
 			}
-			logger.error("No jobs defined, please define jobs in the jobs.txt");
+			logger.error("No jobs defined, please define jobs in config/jobs.txt");
 			System.exit(1);
 		}
 		cronCollect = new CronFileCollector(f.getAbsolutePath());

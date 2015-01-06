@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import main.jobs.BaseTask;
+import main.utils.FileOperations;
 import main.utils.MailHandler;
 import main.utils.PresentationUtil;
 
@@ -55,8 +56,14 @@ public class DirtyTaskExecutionListener implements TaskExecutorListener {
 				.getMessage();
 		logger.info(String.format("%s %s %s", executor.getTask().toString(),
 				time, exit));
+		BaseTask t = (BaseTask) executor.getTask();
+		// store log file until next run
+		try{
+			FileOperations.writeFile("log/"+t.getName()+".log", t.getLog());
+		}catch(Exception e){
+			logger.error("Could not write log file for "+t.getName()+"\n"+e.getMessage());
+		}
 		if (exception != null) {
-			BaseTask t = (BaseTask) executor.getTask();
 			try {
 				if (mailHandler != null) {
 					mailHandler.createMail(
