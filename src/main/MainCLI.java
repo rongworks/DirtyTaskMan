@@ -2,6 +2,8 @@ package main;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 import it.sauronsoftware.cron4j.Scheduler;
 import main.collectors.CronFileCollector;
@@ -16,7 +18,7 @@ public class MainCLI {
 	private static ApplicationManager applicationManager;
 	private static Scheduler scheduler;
 	private static CronFileCollector cronCollect;
-	private static boolean active;
+	private static boolean active = false;
 	
 	public static ApplicationManager getApplicationManager() {
 		if (applicationManager == null) {
@@ -25,7 +27,8 @@ public class MainCLI {
 		return applicationManager;
 	}
 
-	public static void main(String[] args) {
+	public static void start(String[] args){
+		logger.info("Starting DirtyTaskMan");
 		getApplicationManager();
 		active = true; // run forever till terminated
 		setUpScheduler();
@@ -34,7 +37,33 @@ public class MainCLI {
 		while(active){
 			// run run run
 		}
+		
+		
+	}
+	
+	public static void stop(String[] args){
+		logger.info("Stopping DirtyTaskMan");
 		scheduler.stop();
+		active = false;
+	}
+	
+	public static void main(String[] args) {
+		String msg = "Wrong arguments, expected 'start' or 'stop', got "+Arrays.toString(args);
+		if(args.length == 0){
+			logger.error(msg);
+			System.err.println(msg);
+			System.exit(1);
+		}
+		if ("start".equals(args[0])) {
+			start(args);
+		} else if ("stop".equals(args[0])) {
+		  stop(args);
+		}
+		else{
+			logger.error(msg);
+			System.err.println(msg);
+			System.exit(1);
+		}
 	}
 	
 	public static void setUpScheduler(){
