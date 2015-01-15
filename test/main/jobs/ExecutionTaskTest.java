@@ -15,7 +15,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ExecutionTaskTest {
+public class ExecutionTaskTest extends TaskTests{
 
 	@Before
 	public void setUp() throws Exception {

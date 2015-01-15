@@ -12,7 +12,10 @@ public class FileOperations {
 	public static File writeFile(String name, String content) {
 		try {
 			File f = new File(name);
-			f.mkdirs();
+			// check parent folders and create if necessary
+			if(f.getParentFile() != null){
+				f.getParentFile().mkdirs();
+			}
 			FileWriter writer = new FileWriter(f);
 			BufferedWriter bwriter = new BufferedWriter(writer);
 			bwriter.write(content);

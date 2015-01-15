@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-public class AlarmTaskTest {
+public class AlarmTaskTest extends TaskTests{
 
 	
 	@Before

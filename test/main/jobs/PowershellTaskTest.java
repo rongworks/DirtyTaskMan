@@ -9,7 +9,7 @@ import it.sauronsoftware.cron4j.TaskExecutor;
 import org.junit.Test;
 
 
-public class PowershellTaskTest {
+public class PowershellTaskTest extends TaskTests{
 
 	@Test
 	public void testPowershellTask() throws Exception {
