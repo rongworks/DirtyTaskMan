@@ -32,6 +32,7 @@ public class AlarmTaskTest extends TaskTests{
 		when(mockCon.getTaskExecutor()).thenReturn(mockExecutor);
 		String testMessage = "Alarm!";
 		AlarmTask alarm = new AlarmTask("MyAlarmTest", testMessage);
+		alarm.setShowPopUp(false);
 		alarm.execute(mockCon);
 		assertTrue(alarm.getLog().contains(testMessage));
 	}
